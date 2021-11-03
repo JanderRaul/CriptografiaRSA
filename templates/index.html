@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criptografia RSA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #f7f7f7;
+        }
+        .wrapper{
+            background: #fff;
+            width: 450px;
+            border-radius: 16px;
+            box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
+                        0 32px 64px -48px rgba(0, 0, 0, 0.5);
+        }
+        .form{
+            padding: 25px 30px;
+        }
+        .form header{
+            font-size: 25px;
+            font-weight: 600;
+            border-bottom: 1px solid #e6e6e6;
+        }
+        .form form{
+            margin: 20px 0;
+        }
+        .form form .field{
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+        .form form .field label{
+            margin-bottom: 2px;
+        }
+        .form form .input input{
+            outline: none;
+        }
+        .form form .input input{
+            height: 40px;
+            width: 100%;
+            font-size: 16px;
+            padding: 0 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form form .button input{
+            margin-top: 13px;
+            height: 45px;
+            border: none;
+            font-size: 17px;
+            font-weight: 400;
+            background: #333;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form form .field i{
+            position: absolute;
+            right: 15px;
+            color: #ccc;
+            top: 70%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        .form form .field i.active::before{
+            color: #333;
+            content: "\f070";    
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <section class="form singup">
+            <header>Criptografia RSA</header>
+            <form action="valores" method="POST">                
+                <div class="name-details">
+                    <div class="field input">
+                        <label>Valor Q</label>
+                        <input type="text" name="valorp" placeholder="Número primo" required>
+                    </div>
+                    <div class="field input">
+                        <label>Valor P</label>
+                        <input type="text" name="valorq" placeholder="Número primo" required>
+                    </div>
+                </div>
+                <div class="field input">
+                    <label>Senha</label>
+                    <input type="password" name="senha" placeholder="Crie uma senha" required>
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="field button">
+                    <input type="submit" value="Gerar Dados">
+                </div>
+                {%for msg in entradas%}
+                <div class="field input">
+                    <input type="text" name="email" value="{{(msg)}}">
+                </div>
+                {% endfor %}
+            </form>
+            
+        </section>
+    </div>
+    <script>
+        const pswrdField = document.querySelector(".form input[type='password']"),
+        toggleBtn = document.querySelector(".form .field i");
+
+        toggleBtn.onclick = ()=>{
+            if(pswrdField.type == "password"){
+                pswrdField.type = "text";
+                toggleBtn.classList.add("active");
+            }else{
+                pswrdField.type = "password";
+                toggleBtn.classList.remove("active");
+            }
+        }
+    </script>
+</body>
+</html>
